@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="1dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/posterImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        fresco:placeholderImage="@drawable/ic_sort_white_24dp"
+        fresco:viewAspectRatio="0.6654676259"/>
+
+    <View
+        android:id="@+id/footerBackground"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@color/colorPrimary"
+        android:layout_below="@+id/posterImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/footerBackground"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="2dp"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        tools:text="Movie title"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"/>
+</RelativeLayout>
