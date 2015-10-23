@@ -1,4 +1,4 @@
-package xyz.louiscad.popularmovies.rest;
+package xyz.louiscad.popularmovies.rest.converter;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.squareup.okhttp.ResponseBody;

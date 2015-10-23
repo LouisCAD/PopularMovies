@@ -18,6 +18,7 @@ import retrofit.http.Query;
 import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
 import xyz.louiscad.popularmovies.model.MovieDiscoverResult;
+import xyz.louiscad.popularmovies.rest.converter.LoganSquareConverterFactory;
 
 /**
  * API to access <a href="http://themoviedb.org">TheMovieDb</a>

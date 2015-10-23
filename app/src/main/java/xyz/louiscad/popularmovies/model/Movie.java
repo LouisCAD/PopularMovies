@@ -1,5 +1,7 @@
 package xyz.louiscad.popularmovies.model;
 
+import android.support.v7.graphics.Palette;
+
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.util.Date;
@@ -23,6 +25,7 @@ public class Movie {
     public String original_language;
     public String backdrop_path;
     public String poster_path;
+    public transient Palette posterPalette;
     //Optional data get with /movie/{id}
     public String tagline;
     public String status;
