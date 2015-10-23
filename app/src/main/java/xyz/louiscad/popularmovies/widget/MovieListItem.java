@@ -25,7 +25,7 @@ import org.androidannotations.annotations.ViewById;
 import trikita.log.Log;
 import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
-import xyz.louiscad.popularmovies.ImageUtil;
+import xyz.louiscad.popularmovies.util.ImageUtil;
 import xyz.louiscad.popularmovies.util.recyclerview.ViewWrapper;
 
 /**
