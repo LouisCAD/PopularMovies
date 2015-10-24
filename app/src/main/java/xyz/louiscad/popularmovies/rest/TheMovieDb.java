@@ -64,8 +64,8 @@ public final class TheMovieDb {
 
     public interface API {
 
-        @GET("discover/movie")
-        Call<MovieDiscoverResult> discoverMovies(@Query("page") int page);
+        @GET("discover/movie?vote_count.gte=9")
+        Call<MovieDiscoverResult> discoverMovies(@Query("page") int page, @Query("sort_by") String sort);
 
         @GET("movie/{id}")
         Call<Movie> getMovie(@Path("id") long id);

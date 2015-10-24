@@ -25,11 +25,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OptionsItem
-    void actionSortSelected() {
-        //TODO: Show sort dialog
-    }
-
-    @OptionsItem
     void actionSettingsSelected() {
         Log.i("Settings clicked");
     }

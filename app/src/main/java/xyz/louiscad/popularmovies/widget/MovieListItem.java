@@ -43,18 +43,21 @@ public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Mov
     @ViewById
     View footerBackground;
 
+    private Movie mMovie;
+
     public MovieListItem(Context context) {
         super(context);
     }
 
     @Override
     public void bind(final Movie movie) {
+        mMovie = movie;
         titleTextView.setText(movie.title);
         Uri posterUri = ImageUtil.getPosterUri(movie.poster_path);
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         if (movie.posterPalette == null) {
             DataSource<CloseableReference<CloseableImage>> dataSource
-                    = imagePipeline.fetchImageFromBitmapCache(ImageRequest.fromUri(posterUri), null);
+                    = imagePipeline.fetchDecodedImage(ImageRequest.fromUri(posterUri), null);
             dataSource.subscribe(new BaseBitmapDataSubscriber() {
                 @Override
                 protected void onNewResultImpl(Bitmap bitmap) {
@@ -62,7 +65,7 @@ public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Mov
                         movie.posterPalette = new Palette.Builder(bitmap).generate();
                         setFooterColor(movie.posterPalette);
                         Log.i("new bitmap received");
-                    }
+                    } else Log.w("received a null bitmap");
                 }
 
                 @Override
@@ -78,7 +81,7 @@ public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Mov
 
     @UiThread
     void setFooterColor(Palette palette) {
-        int color = palette.getVibrantColor(getResources().getColor(R.color.colorPrimary));
+        int color = palette.getMutedColor(getResources().getColor(R.color.colorPrimary));
         footerBackground.setBackgroundColor(color);
     }
 }
