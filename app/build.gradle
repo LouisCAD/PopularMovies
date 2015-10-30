@@ -29,14 +29,25 @@ buildscript {
     }
 }
 
+repositories {
+    maven {
+        url = 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+}
+
 def AAVersion = '3.3.2'
+def AASnapshotVersion = '4.0-SNAPSHOT'
+def parcelerVersion = '1.0.4'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    apt "org.androidannotations:androidannotations:$AAVersion"
-    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AASnapshotVersion"
+    apt "org.androidannotations:androidannotations:$AASnapshotVersion"
+    compile 'com.bluelinelabs:logansquare:1.1.0'
     apt 'com.bluelinelabs:logansquare-compiler:1.1.0'
+    compile "org.parceler:parceler-api:${parcelerVersion}"
+    apt "org.parceler:parceler:${parcelerVersion}"
     compile 'com.android.support:support-v4:23.1.0'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:recyclerview-v7:23.1.0'
@@ -44,7 +55,6 @@ dependencies {
     compile 'com.android.support:palette-v7:23.1.0'
     compile 'com.android.support:support-annotations:23.1.0'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.bluelinelabs:logansquare:1.1.0'
     compile 'com.facebook.fresco:fresco:0.7.0'
     compile 'co.trikita:log:1.1.1'
 }

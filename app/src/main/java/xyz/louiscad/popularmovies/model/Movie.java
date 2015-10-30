@@ -1,11 +1,16 @@
 package xyz.louiscad.popularmovies.model;
 
-import android.support.v7.graphics.Palette;
+import android.net.Uri;
 
 import com.bluelinelabs.logansquare.annotation.JsonObject;
+import com.bluelinelabs.logansquare.annotation.OnJsonParseComplete;
+
+import org.parceler.Parcel;
 
 import java.util.Date;
 import java.util.List;
+
+import xyz.louiscad.popularmovies.util.ImageUtil;
 
 import static com.bluelinelabs.logansquare.annotation.JsonObject.FieldDetectionPolicy.NONPRIVATE_FIELDS;
 
@@ -13,7 +18,11 @@ import static com.bluelinelabs.logansquare.annotation.JsonObject.FieldDetectionP
  * Created by Louis Cognault on 09/10/15.
  */
 @JsonObject(fieldDetectionPolicy = NONPRIVATE_FIELDS)
+@Parcel
 public class Movie {
+
+    public static final String MOVIE_EXTRA = "movie";
+
     public long id;
     public String title;
     public String original_title;
@@ -25,11 +34,19 @@ public class Movie {
     public String original_language;
     public String backdrop_path;
     public String poster_path;
-    public transient Palette posterPalette;
+    public Uri backdropUrl;
+    public Uri posterUrl;
+    public PaletteLite posterPalette;
     //Optional data get with /movie/{id}
     public String tagline;
     public String status;
     public long budget;
     public List<Genre> genres;
     public List<ProductionCompany> production_companies;
+
+    @OnJsonParseComplete
+    void onParseComplete() {
+        posterUrl = ImageUtil.getPosterUri(poster_path);
+        backdropUrl = ImageUtil.getPosterUri(backdrop_path);
+    }
 }

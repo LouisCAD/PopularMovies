@@ -2,7 +2,6 @@ package xyz.louiscad.popularmovies.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.v7.graphics.Palette;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,14 +24,17 @@ import org.androidannotations.annotations.ViewById;
 import trikita.log.Log;
 import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
-import xyz.louiscad.popularmovies.util.ImageUtil;
+import xyz.louiscad.popularmovies.model.PaletteLite;
+import xyz.louiscad.popularmovies.ui.activity.MovieDetailActivity_;
+import xyz.louiscad.popularmovies.ui.adapter.MovieItemAdapter;
 import xyz.louiscad.popularmovies.util.recyclerview.ViewWrapper;
 
 /**
- * Created by Louis Cognault on 11/10/15.
+ * List Item for a Movie
+ * @see MovieItemAdapter
  */
 @EViewGroup(R.layout.list_item_movie)
-public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Movie> {
+public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Movie>, View.OnClickListener {
 
     @ViewById
     TextView titleTextView;
@@ -47,22 +49,27 @@ public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Mov
 
     public MovieListItem(Context context) {
         super(context);
+        setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        MovieDetailActivity_.intent(getContext()).mMovie(mMovie).start();
     }
 
     @Override
     public void bind(final Movie movie) {
         mMovie = movie;
         titleTextView.setText(movie.title);
-        Uri posterUri = ImageUtil.getPosterUri(movie.poster_path);
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         if (movie.posterPalette == null) {
             DataSource<CloseableReference<CloseableImage>> dataSource
-                    = imagePipeline.fetchDecodedImage(ImageRequest.fromUri(posterUri), null);
+                    = imagePipeline.fetchDecodedImage(ImageRequest.fromUri(movie.posterUrl), null);
             dataSource.subscribe(new BaseBitmapDataSubscriber() {
                 @Override
                 protected void onNewResultImpl(Bitmap bitmap) {
                     if (bitmap != null) {
-                        movie.posterPalette = new Palette.Builder(bitmap).generate();
+                        movie.posterPalette = new PaletteLite(getContext(), new Palette.Builder(bitmap).generate());
                         setFooterColor(movie.posterPalette);
                         Log.i("new bitmap received");
                     } else Log.w("received a null bitmap");
@@ -76,12 +83,13 @@ public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Mov
         } else {
             setFooterColor(movie.posterPalette);
         }
-        posterImage.setImageURI(posterUri);
+        posterImage.setImageURI(movie.posterUrl);
     }
 
+
+
     @UiThread
-    void setFooterColor(Palette palette) {
-        int color = palette.getMutedColor(getResources().getColor(R.color.colorPrimary));
-        footerBackground.setBackgroundColor(color);
+    void setFooterColor(PaletteLite palette) {
+        footerBackground.setBackgroundColor(palette.mutedColor);
     }
 }
