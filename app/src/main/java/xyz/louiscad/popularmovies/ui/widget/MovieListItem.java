@@ -71,13 +71,12 @@ public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Mov
                     if (bitmap != null) {
                         movie.posterPalette = new PaletteLite(getContext(), new Palette.Builder(bitmap).generate());
                         setFooterColor(movie.posterPalette);
-                        Log.i("new bitmap received");
                     } else Log.w("received a null bitmap");
                 }
 
                 @Override
                 protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
-                    Log.i("onFailureImpl");
+                    Log.w("onFailureImpl");
                 }
             }, new DefaultExecutorSupplier(1).forBackgroundTasks());
         } else {

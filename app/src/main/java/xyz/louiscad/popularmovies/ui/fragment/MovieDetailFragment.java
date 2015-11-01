@@ -17,6 +17,10 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.ViewsById;
+
+import java.text.DateFormat;
+import java.util.List;
 
 import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
@@ -42,7 +46,10 @@ public class MovieDetailFragment extends Fragment {
     @ViewById SimpleDraweeView backdropImage, posterImage;
 
     @ViewById
-    TextView overviewTitleTextView, overviewTextView;
+    TextView overviewTextView, releaseDateTextView, ratingTextView;
+
+    @ViewsById({R.id.overviewTitleTextView, R.id.releaseDateTitleTextView, R.id.ratingTitleTextView})
+    List<TextView> mTextViews;
 
     @AfterViews
     void init() {
@@ -52,10 +59,15 @@ public class MovieDetailFragment extends Fragment {
         backdropImage.setImageURI(mMovie.backdropUrl);
         toolbar.setTitle(mMovie.title);
         overviewTextView.setText(mMovie.overview);
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity());
+        releaseDateTextView.setText(dateFormat.format(mMovie.release_date));
+        ratingTextView.setText(mMovie.vote_average + "/10"); //TODO: Use String res with placeholder
         if (mMovie.posterPalette != null) {
             toolbarLayout.setContentScrimColor(mMovie.posterPalette.mutedColor);
             fab.setBackgroundTintList(ColorStateList.valueOf(mMovie.posterPalette.vibrantColor));
-            overviewTitleTextView.setTextColor(mMovie.posterPalette.vibrantColor);
+            for (TextView textView : mTextViews) {
+                textView.setTextColor(mMovie.posterPalette.vibrantColor);
+            }
         }
     }
 

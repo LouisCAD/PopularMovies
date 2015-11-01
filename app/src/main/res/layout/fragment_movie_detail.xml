@@ -35,8 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:background="@android:color/transparent"
-                android:clipToPadding="false"
                 android:clipChildren="false"
+                android:clipToPadding="false"
                 app:layout_collapseMode="pin"/>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -46,24 +46,76 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <android.support.percent.PercentRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:orientation="vertical">
+            android:layout_margin="16dp">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/posterImage"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:padding="8dp"
+                app:layout_widthPercent="50%"
                 app:progressBarImage="@color/colorPrimary"
                 app:viewAspectRatio="0.6654676259"/>
+
+            <TextView
+                android:id="@+id/releaseDateTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/posterImage"
+                android:layout_toRightOf="@id/posterImage"
+                android:padding="8dp"
+                android:text="@string/release_date"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="?colorAccent"/>
+
+            <TextView
+                android:id="@+id/releaseDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/releaseDateTitleTextView"
+                android:layout_toEndOf="@id/posterImage"
+                android:layout_toRightOf="@id/posterImage"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                tools:text="2015-08-25"/>
+
+            <TextView
+                android:id="@+id/ratingTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/releaseDateTextView"
+                android:layout_toEndOf="@id/posterImage"
+                android:layout_toRightOf="@id/posterImage"
+                android:padding="8dp"
+                android:text="@string/rating"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="?colorAccent"/>
+
+            <TextView
+                android:id="@+id/ratingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ratingTitleTextView"
+                android:layout_toEndOf="@id/posterImage"
+                android:layout_toRightOf="@id/posterImage"
+                android:paddingLeft="8dp"
+                tools:text="10/10"
+                android:paddingRight="8dp"/>
 
             <TextView
                 android:id="@+id/overviewTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/posterImage"
+                android:padding="8dp"
                 android:text="@string/overview"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="?colorAccent"/>
@@ -72,9 +124,12 @@
                 android:id="@+id/overviewTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/overviewTitleTextView"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:textAppearance="?android:textAppearance"
-                tools:text="bla bla"/>
-        </LinearLayout>
+                tools:text="This is the movie overview"/>
+        </android.support.percent.PercentRelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
