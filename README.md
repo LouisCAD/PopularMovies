@@ -13,5 +13,6 @@ The movies showed in this app come from [themoviedb.org](https://themoviedb.org)
     - RecyclerView
     - Palette
     - Design
+    - Percent
     - Support Annotations
     - AppCompat

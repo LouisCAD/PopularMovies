@@ -2,11 +2,15 @@ package xyz.louiscad.popularmovies;
 
 import android.app.Application;
 
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EApplication;
 
+import java.util.Date;
+
+import xyz.louiscad.popularmovies.rest.DateConverter;
 import xyz.louiscad.popularmovies.rest.TheMovieDb;
 
 /**
@@ -20,6 +24,7 @@ public class MoviesApp extends Application {
     @AfterInject
     void init() {
         Fresco.initialize(this);
+        LoganSquare.registerTypeConverter(Date.class, new DateConverter());
         mAPI = TheMovieDb.createAPI(this);
     }
 
