@@ -57,7 +57,7 @@ public class MovieDetailFragment extends Fragment {
         if (SDK_INT > 21) getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
         posterImage.setImageURI(mMovie.posterUrl);
         backdropImage.setImageURI(mMovie.backdropUrl);
-        toolbar.setTitle(mMovie.title);
+        toolbarLayout.setTitle(mMovie.title);
         overviewTextView.setText(mMovie.overview);
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity());
         releaseDateTextView.setText(dateFormat.format(mMovie.release_date));
