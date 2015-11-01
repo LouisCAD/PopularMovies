@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,7 @@ import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.MovieDiscoverResult;
 import xyz.louiscad.popularmovies.ui.adapter.MovieItemAdapter;
 import xyz.louiscad.popularmovies.ui.fragment.MovieListFragment_.MovieListPrefs_;
+import xyz.louiscad.popularmovies.util.recyclerview.EndlessRecyclerOnScrollListener;
 
 import static android.support.design.widget.Snackbar.LENGTH_LONG;
 
@@ -96,9 +98,18 @@ public class MovieListFragment extends Fragment
     @AfterViews
     void init() {
         int spanCount = getResources().getInteger(R.integer.span_count);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), spanCount));
+        LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
+        //TODO: Use new API for OnScrollListener and make infinite scroll code a little cleaner here
+        recyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                String sort = prefs.sort().get() + "." + DESC;
+                mApp.getAPI().discoverMovies(currentPage, sort).enqueue(MovieListFragment.this);
+            }
+        });
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
         swipeRefreshLayout.setOnRefreshListener(this);
     }
@@ -124,7 +135,7 @@ public class MovieListFragment extends Fragment
         swipeRefreshLayout.setRefreshing(false);
         MovieDiscoverResult result = response.body();
         if (!response.isSuccess() || result == null) onFailure(new NullPointerException());
-        else mAdapter.onDataUpdated(response.body().results);
+        else mAdapter.onDataUpdated(response.body().results, response.body().page);
     }
 
     @Override
