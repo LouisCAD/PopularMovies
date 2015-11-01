@@ -5,6 +5,13 @@ The movies showed in this app come from [themoviedb.org](https://themoviedb.org)
 
 ## Used libraries
 - [AndroidAnnotations](http://androidannotations.org) to remove boilerplate
-- [Fresco](http://stackoverflow.com/questions/29363321/picasso-v-s-imageloader-v-s-fresco-vs-glide) for images loading
-- Appcompat Android Support Library
-- Android Design Support Library
+- [Fresco](http://stackoverflow.com/questions/29363321/picasso-v-s-imageloader-v-s-fresco-vs-glide) for images management (including loading from network)
+- [Retrofit & OkHttp](https://square.github.io/retrofit/) A type-safe HTTP client for Android and Java
+- [LoganSquare](https://github.com/bluelinelabs/LoganSquare)
+- [Parceler](https://github.com/johncarl81/parceler)
+- [Android Support Libraries](http://developer.android.com/tools/support-library/features.html):
+    - RecyclerView
+    - Palette
+    - Design
+    - Support Annotations
+    - AppCompat

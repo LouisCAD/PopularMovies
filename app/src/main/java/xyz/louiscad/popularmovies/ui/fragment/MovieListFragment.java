@@ -123,7 +123,7 @@ public class MovieListFragment extends Fragment
     public void onResponse(Response<MovieDiscoverResult> response, Retrofit retrofit) {
         swipeRefreshLayout.setRefreshing(false);
         MovieDiscoverResult result = response.body();
-        if (result == null) onFailure(new NullPointerException());
+        if (!response.isSuccess() || result == null) onFailure(new NullPointerException());
         else mAdapter.onDataUpdated(response.body().results);
     }
 

@@ -13,7 +13,7 @@ import static android.support.v4.content.ContextCompat.getColor;
 import static com.bluelinelabs.logansquare.annotation.JsonObject.FieldDetectionPolicy.NONPRIVATE_FIELDS;
 
 /**
- * Created by Louis Cognault on 30/10/15.
+ * Parcelable palette info for Movie to prevent double calculation
  */
 @JsonObject(fieldDetectionPolicy = NONPRIVATE_FIELDS)
 @Parcel
@@ -21,12 +21,12 @@ public class PaletteLite {
 
     public PaletteLite(Context context, Palette palette) {
         mutedColor = palette.getMutedColor(getColor(context, R.color.colorPrimary));
-        lightVibrantColor = palette.getVibrantColor(getColor(context, R.color.colorAccent));
+        vibrantColor = palette.getVibrantColor(getColor(context, R.color.colorAccent));
     }
 
     public PaletteLite() {
     }
 
     public int mutedColor;
-    public int lightVibrantColor;
+    public int vibrantColor;
 }

@@ -6,8 +6,8 @@ import java.util.List;
 
 import xyz.louiscad.popularmovies.model.Movie;
 import xyz.louiscad.popularmovies.util.recyclerview.RecyclerViewAdapterBase;
-import xyz.louiscad.popularmovies.widget.MovieListItem;
-import xyz.louiscad.popularmovies.widget.MovieListItem_;
+import xyz.louiscad.popularmovies.ui.widget.MovieListItem;
+import xyz.louiscad.popularmovies.ui.widget.MovieListItem_;
 
 /**
  * Created by Louis Cognault on 11/10/15.

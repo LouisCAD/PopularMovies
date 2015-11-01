@@ -15,7 +15,7 @@ import xyz.louiscad.popularmovies.util.ImageUtil;
 import static com.bluelinelabs.logansquare.annotation.JsonObject.FieldDetectionPolicy.NONPRIVATE_FIELDS;
 
 /**
- * Created by Louis Cognault on 09/10/15.
+ * Model for Movies from TMDb
  */
 @JsonObject(fieldDetectionPolicy = NONPRIVATE_FIELDS)
 @Parcel
@@ -32,8 +32,8 @@ public class Movie {
     public long vote_count;
     public Date release_date;
     public String original_language;
-    public String backdrop_path;
-    public String poster_path;
+    String backdrop_path;
+    String poster_path;
     public Uri backdropUrl;
     public Uri posterUrl;
     public PaletteLite posterPalette;
@@ -47,6 +47,6 @@ public class Movie {
     @OnJsonParseComplete
     void onParseComplete() {
         posterUrl = ImageUtil.getPosterUri(poster_path);
-        backdropUrl = ImageUtil.getPosterUri(backdrop_path);
+        backdropUrl = ImageUtil.getBackdropUri(backdrop_path);
     }
 }

@@ -9,7 +9,8 @@ import java.util.List;
 import static com.bluelinelabs.logansquare.annotation.JsonObject.FieldDetectionPolicy.NONPRIVATE_FIELDS;
 
 /**
- * Created by Louis Cognault on 10/10/15.
+ * Model for TMDb API result
+ * @see Movie
  */
 @JsonObject(fieldDetectionPolicy = NONPRIVATE_FIELDS)
 @Parcel

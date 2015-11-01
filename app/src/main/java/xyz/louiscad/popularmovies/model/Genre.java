@@ -7,7 +7,7 @@ import org.parceler.Parcel;
 import static com.bluelinelabs.logansquare.annotation.JsonObject.FieldDetectionPolicy.NONPRIVATE_FIELDS;
 
 /**
- * Created by Louis Cognault on 09/10/15.
+ * @see Movie
  */
 @JsonObject(fieldDetectionPolicy = NONPRIVATE_FIELDS)
 @Parcel

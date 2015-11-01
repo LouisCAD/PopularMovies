@@ -1,4 +1,4 @@
-package xyz.louiscad.popularmovies.widget;
+package xyz.louiscad.popularmovies.ui.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
