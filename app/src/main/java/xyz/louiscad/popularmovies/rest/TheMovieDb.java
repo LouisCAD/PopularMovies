@@ -18,6 +18,7 @@ import retrofit.http.Query;
 import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
 import xyz.louiscad.popularmovies.model.MovieDiscoverResult;
+import xyz.louiscad.popularmovies.model.ReviewsResult;
 import xyz.louiscad.popularmovies.rest.converter.LoganSquareConverterFactory;
 
 /**
@@ -69,5 +70,8 @@ public final class TheMovieDb {
 
         @GET("movie/{id}")
         Call<Movie> getMovie(@Path("id") long id);
+
+        @GET("movie/{id}/review")
+        Call<ReviewsResult> getReviews(@Path("id") long id);
     }
 }
