@@ -19,6 +19,7 @@ import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
 import xyz.louiscad.popularmovies.model.MovieDiscoverResult;
 import xyz.louiscad.popularmovies.model.ReviewsResult;
+import xyz.louiscad.popularmovies.model.VideosResult;
 import xyz.louiscad.popularmovies.rest.converter.LoganSquareConverterFactory;
 
 /**
@@ -70,6 +71,9 @@ public final class TheMovieDb {
 
         @GET("movie/{id}")
         Call<Movie> getMovie(@Path("id") long id);
+
+        @GET("movie/{id}/videos")
+        Call<VideosResult> getVideos(@Path("id") long id);
 
         @GET("movie/{id}/review")
         Call<ReviewsResult> getReviews(@Path("id") long id);
