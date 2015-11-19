@@ -16,3 +16,6 @@ The movies showed in this app come from [themoviedb.org](https://themoviedb.org)
     - Percent
     - Support Annotations
     - AppCompat
+
+## Usage
+You will need to put your own private TMDb API key in the keys.xml file under res/values directory to be able to see this app working.
