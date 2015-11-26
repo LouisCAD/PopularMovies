@@ -97,4 +97,6 @@
     <string name="overview">Overview</string>
     <string name="release_date">Release date</string>
     <string name="rating">Rating</string>
+    <string name="videos">Videos</string>
+    <string name="comments">Comments</string>
 </resources>

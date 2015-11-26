@@ -13,9 +13,6 @@ import java.util.Date;
 import xyz.louiscad.popularmovies.rest.DateConverter;
 import xyz.louiscad.popularmovies.rest.TheMovieDb;
 
-/**
- * Created by Louis Cognault on 10/10/15.
- */
 @EApplication
 public class MoviesApp extends Application {
 

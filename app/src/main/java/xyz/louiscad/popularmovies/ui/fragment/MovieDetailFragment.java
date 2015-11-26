@@ -48,7 +48,12 @@ public class MovieDetailFragment extends Fragment {
     @ViewById
     TextView overviewTextView, releaseDateTextView, ratingTextView;
 
-    @ViewsById({R.id.overviewTitleTextView, R.id.releaseDateTitleTextView, R.id.ratingTitleTextView})
+    @ViewsById({
+            R.id.overviewTitleTextView,
+            R.id.releaseDateTitleTextView,
+            R.id.ratingTitleTextView,
+            R.id.videosTitleTextView,
+            R.id.commentsTitleTextView})
     List<TextView> mTextViews;
 
     @AfterViews

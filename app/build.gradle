@@ -70,7 +70,7 @@ dependencies {
 
 apt {
     arguments {
-        androidManifestFile variant.outputs[0].processResources.manifestFile // For AA
+        //androidManifestFile variant.outputs[0].processResources.manifestFile // For AA
         logLevel 'TRACE'
         library 'true'
         logAppenderConsole 'true'

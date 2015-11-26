@@ -65,14 +65,10 @@
 
             <TextView
                 android:id="@+id/releaseDateTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TitleTextViewStyle"
                 android:layout_toEndOf="@id/posterImage"
                 android:layout_toRightOf="@id/posterImage"
-                android:padding="8dp"
-                android:text="@string/release_date"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="?colorAccent"/>
+                android:text="@string/release_date"/>
 
             <TextView
                 android:id="@+id/releaseDateTextView"
@@ -87,15 +83,11 @@
 
             <TextView
                 android:id="@+id/ratingTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TitleTextViewStyle"
                 android:layout_below="@id/releaseDateTextView"
                 android:layout_toEndOf="@id/posterImage"
                 android:layout_toRightOf="@id/posterImage"
-                android:padding="8dp"
-                android:text="@string/rating"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="?colorAccent"/>
+                android:text="@string/rating"/>
 
             <TextView
                 android:id="@+id/ratingTextView"
@@ -105,8 +97,8 @@
                 android:layout_toEndOf="@id/posterImage"
                 android:layout_toRightOf="@id/posterImage"
                 android:paddingLeft="8dp"
-                tools:text="10/10"
-                android:paddingRight="8dp"/>
+                android:paddingRight="8dp"
+                tools:text="10/10"/>
 
             <TextView
                 android:id="@+id/overviewTitleTextView"
@@ -129,6 +121,25 @@
                 android:paddingRight="8dp"
                 android:textAppearance="?android:textAppearance"
                 tools:text="This is the movie overview"/>
+
+            <TextView
+                android:id="@+id/videosTitleTextView"
+                style="@style/TitleTextViewStyle"
+                android:layout_below="@id/overviewTextView"
+                android:text="@string/videos"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/videosRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/videosTitleTextView"/>
+
+            <TextView
+                android:id="@+id/commentsTitleTextView"
+                style="@style/TitleTextViewStyle"
+                android:layout_below="@id/videosRecyclerView"
+                android:text="@string/comments"/>
+
         </android.support.percent.PercentRelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 
