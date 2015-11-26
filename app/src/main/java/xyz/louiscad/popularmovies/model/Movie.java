@@ -43,6 +43,7 @@ public class Movie {
     public long budget;
     public List<Genre> genres;
     public List<ProductionCompany> production_companies;
+    public List<Video> videos;
 
     @OnJsonParseComplete
     void onParseComplete() {
