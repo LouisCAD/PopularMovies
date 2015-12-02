@@ -41,107 +41,114 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:fitsSystemWindows="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.percent.PercentRelativeLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp">
+            android:layout_height="match_parent">
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/posterImage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:padding="8dp"
-                app:layout_widthPercent="50%"
-                app:progressBarImage="@color/colorPrimary"
-                app:viewAspectRatio="0.6654676259"/>
-
-            <TextView
-                android:id="@+id/releaseDateTitleTextView"
-                style="@style/TitleTextViewStyle"
-                android:layout_toEndOf="@id/posterImage"
-                android:layout_toRightOf="@id/posterImage"
-                android:text="@string/release_date"/>
-
-            <TextView
-                android:id="@+id/releaseDateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/releaseDateTitleTextView"
-                android:layout_toEndOf="@id/posterImage"
-                android:layout_toRightOf="@id/posterImage"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                tools:text="2015-08-25"/>
-
-            <TextView
-                android:id="@+id/ratingTitleTextView"
-                style="@style/TitleTextViewStyle"
-                android:layout_below="@id/releaseDateTextView"
-                android:layout_toEndOf="@id/posterImage"
-                android:layout_toRightOf="@id/posterImage"
-                android:text="@string/rating"/>
-
-            <TextView
-                android:id="@+id/ratingTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ratingTitleTextView"
-                android:layout_toEndOf="@id/posterImage"
-                android:layout_toRightOf="@id/posterImage"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                tools:text="10/10"/>
-
-            <TextView
-                android:id="@+id/overviewTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/posterImage"
-                android:padding="8dp"
-                android:text="@string/overview"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="?colorAccent"/>
-
-            <TextView
-                android:id="@+id/overviewTextView"
+            <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/overviewTitleTextView"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:textAppearance="?android:textAppearance"
-                tools:text="This is the movie overview"/>
+                android:layout_margin="16dp">
 
-            <TextView
-                android:id="@+id/videosTitleTextView"
-                style="@style/TitleTextViewStyle"
-                android:layout_below="@id/overviewTextView"
-                android:text="@string/videos"/>
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/posterImage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:padding="8dp"
+                    app:layout_widthPercent="50%"
+                    app:progressBarImage="@color/colorPrimary"
+                    app:viewAspectRatio="0.6654676259"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/videosRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/videosTitleTextView"/>
+                <TextView
+                    android:id="@+id/releaseDateTitleTextView"
+                    style="@style/TitleTextViewStyle"
+                    android:layout_toEndOf="@id/posterImage"
+                    android:layout_toRightOf="@id/posterImage"
+                    android:text="@string/release_date"/>
 
-            <TextView
-                android:id="@+id/commentsTitleTextView"
-                style="@style/TitleTextViewStyle"
-                android:layout_below="@id/videosRecyclerView"
-                android:text="@string/comments"/>
+                <TextView
+                    android:id="@+id/releaseDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/releaseDateTitleTextView"
+                    android:layout_toEndOf="@id/posterImage"
+                    android:layout_toRightOf="@id/posterImage"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    tools:text="2015-08-25"/>
 
-        </android.support.percent.PercentRelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
+                <TextView
+                    android:id="@+id/ratingTitleTextView"
+                    style="@style/TitleTextViewStyle"
+                    android:layout_below="@id/releaseDateTextView"
+                    android:layout_toEndOf="@id/posterImage"
+                    android:layout_toRightOf="@id/posterImage"
+                    android:text="@string/rating"/>
+
+                <TextView
+                    android:id="@+id/ratingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ratingTitleTextView"
+                    android:layout_toEndOf="@id/posterImage"
+                    android:layout_toRightOf="@id/posterImage"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    tools:text="10/10"/>
+
+                <TextView
+                    android:id="@+id/overviewTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/posterImage"
+                    android:padding="8dp"
+                    android:text="@string/overview"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="?colorAccent"/>
+
+                <TextView
+                    android:id="@+id/overviewTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/overviewTitleTextView"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textAppearance="?android:textAppearance"
+                    tools:text="This is the movie overview"/>
+
+                <TextView
+                    android:id="@+id/videosTitleTextView"
+                    style="@style/TitleTextViewStyle"
+                    android:layout_below="@id/overviewTextView"
+                    android:text="@string/videos"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/videosRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/videosTitleTextView"/>
+
+                <TextView
+                    android:id="@+id/commentsTitleTextView"
+                    style="@style/TitleTextViewStyle"
+                    android:layout_below="@id/videosRecyclerView"
+                    android:text="@string/comments"/>
+
+            </android.support.percent.PercentRelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

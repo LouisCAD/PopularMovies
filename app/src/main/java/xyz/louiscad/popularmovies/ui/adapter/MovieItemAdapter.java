@@ -6,7 +6,6 @@ import java.util.List;
 
 import xyz.louiscad.popularmovies.model.Movie;
 import xyz.louiscad.popularmovies.ui.widget.MovieListItem;
-import xyz.louiscad.popularmovies.ui.widget.MovieListItem_;
 import xyz.louiscad.popularmovies.util.recyclerview.RecyclerViewAdapterBase;
 
 /**
@@ -28,7 +27,7 @@ public class MovieItemAdapter extends RecyclerViewAdapterBase<Movie, MovieListIt
 
     @Override
     protected MovieListItem onCreateItemView(ViewGroup parent, int viewType) {
-        return MovieListItem_.build(parent.getContext());
+        return MovieListItem.inflate(parent);
     }
 
     @Override

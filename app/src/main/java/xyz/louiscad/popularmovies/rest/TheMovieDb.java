@@ -69,7 +69,7 @@ public final class TheMovieDb {
         @GET("discover/movie?vote_count.gte=9")
         Call<MovieDiscoverResult> discoverMovies(@Query("page") int page, @Query("sort_by") String sort);
 
-        @GET("movie/{id}?append_to_response=movies")
+        @GET("movie/{id}?append_to_response=videos")
         Call<Movie> getMovieDetails(@Path("id") long id);
 
         @GET("movie/{id}/videos")

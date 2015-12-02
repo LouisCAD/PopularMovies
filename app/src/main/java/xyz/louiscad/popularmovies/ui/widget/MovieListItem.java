@@ -1,10 +1,15 @@
 package xyz.louiscad.popularmovies.ui.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.support.v7.graphics.Palette;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.common.references.CloseableReference;
@@ -17,6 +22,7 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -33,8 +39,8 @@ import xyz.louiscad.popularmovies.util.recyclerview.ViewWrapper;
  * List Item for a Movie
  * @see MovieItemAdapter
  */
-@EViewGroup(R.layout.list_item_movie)
-public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Movie>, View.OnClickListener {
+@EViewGroup
+public class MovieListItem extends RelativeLayout implements ViewWrapper.Binder<Movie>, View.OnClickListener {
 
     @ViewById
     TextView titleTextView;
@@ -49,6 +55,23 @@ public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Mov
 
     public MovieListItem(Context context) {
         super(context);
+    }
+
+    public MovieListItem(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public MovieListItem(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public MovieListItem(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    @AfterViews
+    void init() {
         setOnClickListener(this);
     }
 
@@ -90,5 +113,10 @@ public class MovieListItem extends FrameLayout implements ViewWrapper.Binder<Mov
     @UiThread
     void setFooterColor(PaletteLite palette) {
         footerBackground.setBackgroundColor(palette.mutedColor);
+    }
+
+    public static MovieListItem inflate(ViewGroup parent) {
+        return (MovieListItem) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item_movie, parent, false);
     }
 }
