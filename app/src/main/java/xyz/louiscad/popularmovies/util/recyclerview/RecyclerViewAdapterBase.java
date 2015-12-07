@@ -1,6 +1,8 @@
 package xyz.louiscad.popularmovies.util.recyclerview;
 
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -10,10 +12,11 @@ import android.view.ViewGroup;
 public abstract class RecyclerViewAdapterBase<Data, V extends View & ViewWrapper.Binder<Data>> extends RecyclerView.Adapter<ViewWrapper<Data, V>> {
     @Override
     public final ViewWrapper<Data, V> onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewWrapper<>(onCreateItemView(parent, viewType));
+        return new ViewWrapper<>(inflate(getLayout(viewType), parent));
     }
 
-    protected abstract V onCreateItemView(ViewGroup parent, int viewType);
+    @LayoutRes
+    protected abstract int getLayout(int viewType);
 
     @Override
     public final void onBindViewHolder(ViewWrapper<Data, V> holder, int position) {
@@ -23,4 +26,10 @@ public abstract class RecyclerViewAdapterBase<Data, V extends View & ViewWrapper
     }
 
     protected abstract Data getData(int position);
+
+    @SuppressWarnings("unchecked cast")
+    private V inflate(@LayoutRes int layoutResId, ViewGroup parent) {
+        return (V) LayoutInflater.from(parent.getContext())
+                .inflate(layoutResId, parent, false);
+    }
 }
