@@ -1,6 +1,8 @@
 package xyz.louiscad.popularmovies.ui.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -29,6 +31,7 @@ import trikita.log.Log;
 import xyz.louiscad.popularmovies.MoviesApp;
 import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.MovieDiscoverResult;
+import xyz.louiscad.popularmovies.ui.activity.MainActivity;
 import xyz.louiscad.popularmovies.ui.adapter.MovieItemAdapter;
 import xyz.louiscad.popularmovies.ui.fragment.MovieListFragment_.MovieListPrefs_;
 import xyz.louiscad.popularmovies.util.recyclerview.EndlessRecyclerOnScrollListener;
@@ -68,6 +71,7 @@ public class MovieListFragment extends Fragment
 
     @OptionsItem
     void mostPopularSelected() {
+        setToolbarSubtitle(POPULARITY);
         mostPopular.setChecked(true);
         prefs.sort().put(POPULARITY);
         onRefresh();
@@ -75,6 +79,7 @@ public class MovieListFragment extends Fragment
 
     @OptionsItem
     void highestRatedSelected() {
+        setToolbarSubtitle(VOTE_AVERAGE);
         highestRated.setChecked(true);
         prefs.sort().put(VOTE_AVERAGE);
         onRefresh();
@@ -82,6 +87,7 @@ public class MovieListFragment extends Fragment
 
     @OptionsItem
     void newestSelected() {
+        setToolbarSubtitle(NEWEST);
         newest.setChecked(true);
         prefs.sort().put(NEWEST);
         onRefresh();
@@ -97,6 +103,7 @@ public class MovieListFragment extends Fragment
 
     @AfterViews
     void init() {
+        setToolbarSubtitle(null);
         int spanCount = getResources().getInteger(R.integer.span_count);
         LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
         recyclerView.setLayoutManager(layoutManager);
@@ -122,6 +129,18 @@ public class MovieListFragment extends Fragment
             case NEWEST: newest.setChecked(true); break;
             case VOTE_AVERAGE: highestRated.setChecked(true); break;
         }
+    }
+
+    private void setToolbarSubtitle(@Nullable String sort) {
+        if (sort == null) sort = prefs.sort().get();
+        @StringRes int subtitleResId;
+        switch (sort) {
+            case POPULARITY: subtitleResId = R.string.mostPopular; break;
+            case NEWEST: subtitleResId = R.string.newest; break;
+            case VOTE_AVERAGE: subtitleResId = R.string.highestRated; break;
+            default: throw new UnsupportedOperationException();
+        }
+        ((MainActivity) getActivity()).setSubtitle(subtitleResId);
     }
 
     @Override
