@@ -2,11 +2,14 @@
 <resources>
     <color name="colorPrimary">@color/blue_grey_500</color>
     <color name="colorPrimaryDark">@color/blue_grey_600</color>
-    <color name="colorAccent">@color/red_a700</color>
+    <color name="colorAccent">@color/cyan_a200</color>
 
     <color name="white">#ffffffff</color>
+    <color name="light_blue_a200">#40C4FF</color>
+    <color name="cyan_a200">#18FFFF</color>
     <color name="red_a700">#D50000</color>
     <color name="teal_500">#009688</color>
+    <color name="lime_a700">#AEEA00</color>
     <color name="teal_600">#00897B</color>
     <color name="blue_grey_500">#607D8B</color>
     <color name="blue_grey_600">#546E7A</color>

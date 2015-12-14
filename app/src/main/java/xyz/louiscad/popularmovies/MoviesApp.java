@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EApplication;
@@ -20,6 +21,7 @@ public class MoviesApp extends Application {
 
     @AfterInject
     void init() {
+        FlowManager.init(this);
         Fresco.initialize(this);
         LoganSquare.registerTypeConverter(Date.class, new DateConverter());
         mAPI = TheMovieDb.createAPI(this);

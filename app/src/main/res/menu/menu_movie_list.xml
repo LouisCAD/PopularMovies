@@ -15,7 +15,7 @@
                     android:title="@string/mostPopular"/>
                 <item
                     android:id="@+id/highestRated"
-                    android:title="@string/highestRated"/>
+                    android:title="@string/topRated"/>
                 <item
                     android:id="@+id/newest"
                     android:title="@string/newest"/>

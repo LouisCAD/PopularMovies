@@ -97,8 +97,8 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
         toolbarLayout.setTitle(mMovie.title);
         overviewTextView.setText(mMovie.overview);
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity());
-        releaseDateTextView.setText(dateFormat.format(mMovie.release_date));
-        ratingTextView.setText(mMovie.vote_average + "/10"); //TODO: Use String res with placeholder
+        releaseDateTextView.setText(dateFormat.format(mMovie.releaseDate));
+        ratingTextView.setText(mMovie.voteAverage + "/10"); //TODO: Use String res with placeholder
         if (mMovie.posterPalette != null) {
             toolbarLayout.setContentScrimColor(mMovie.posterPalette.mutedColor);
             fab.setBackgroundTintList(ColorStateList.valueOf(mMovie.posterPalette.vibrantColor));
@@ -117,6 +117,7 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
 
     @Click
     void fabClicked() {
+        mMovie.save();
         Snackbar.make(cl, "Not implemented yet… note it on paper!", LENGTH_LONG).show();
     }
 

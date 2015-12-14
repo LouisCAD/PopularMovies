@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:tools="http://schemas.android.com/tools"
-    package="xyz.louiscad.popularmovies"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="xyz.louiscad.popularmovies"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -30,6 +29,18 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity_"/>
+        </activity>
+        <activity
+            android:name=".ui.TestMovieListActivity"
+            android:label="@string/title_testmovie_list">
+        </activity>
+        <activity
+            android:name=".ui.TestMovieDetailActivity"
+            android:label="@string/title_testmovie_detail"
+            android:parentActivityName=".ui.TestMovieListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.louiscad.popularmovies.ui.TestMovieListActivity"/>
         </activity>
     </application>
 
