@@ -8,6 +8,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,9 +59,10 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
     VideoItemAdapter mVideoAdapter;
 
     @ViewById CoordinatorLayout cl;
-    @ViewById SwipeRefreshLayout swipeRefreshLayout;
-    @ViewById CollapsingToolbarLayout toolbarLayout;
     @ViewById Toolbar toolbar;
+    @ViewById CollapsingToolbarLayout toolbarLayout;
+    @ViewById SwipeRefreshLayout swipeRefreshLayout;
+    @ViewById NestedScrollView scrollView;
     @ViewById FloatingActionButton fab;
 
     @ViewById SimpleDraweeView backdropImage, posterImage;
@@ -83,7 +85,7 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         mVideoAdapter = new VideoItemAdapter();
-        onRefresh();
+        if (mMovie != null) onRefresh();
     }
 
     @AfterViews
@@ -92,6 +94,12 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
         if (SDK_INT > 21) getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
         videosRecyclerView.setAdapter(mVideoAdapter);
         videosRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), HORIZONTAL, false));
+        if (mMovie != null) bindViewsToData();
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
+        swipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    private void bindViewsToData() {
         posterImage.setImageURI(mMovie.posterUrl);
         backdropImage.setImageURI(mMovie.backdropUrl);
         toolbarLayout.setTitle(mMovie.title);
@@ -106,8 +114,6 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
                 textView.setTextColor(mMovie.posterPalette.vibrantColor);
             }
         }
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
-        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
@@ -117,8 +123,12 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
 
     @Click
     void fabClicked() {
+        //TODO: Change icon and remove from db if already favored
         mMovie.save();
-        Snackbar.make(cl, "Not implemented yet… note it on paper!", LENGTH_LONG).show();
+        Snackbar.make(cl, "Movie favored!", LENGTH_LONG).show();
+        scrollView.scrollTo(0, 0);
+        toolbarLayout.scrollTo(0, 0);
+        //swipeRefreshLayout.scrollTo(0, 0);
     }
 
     @Override
@@ -134,5 +144,12 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
     public void onFailure(Throwable t) {
         Log.d(t);
         Snackbar.make(cl, "Oops! Unable to get movie details…", LENGTH_LONG).show();
+    }
+
+    public void setMovie(Movie movie) {
+        mMovie = movie;
+        bindViewsToData();
+        scrollView.scrollTo(0, 0);
+        toolbarLayout.scrollTo(0, 0);
     }
 }

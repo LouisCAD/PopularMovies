@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment
-    android:name="xyz.louiscad.popularmovies.ui.fragment.MoviesFragment_"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.activity.MainActivity_"
-    tools:layout="@layout/fragment_movies">
+    android:baselineAligned="false"
+    android:orientation="horizontal">
 
-</fragment>
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="xyz.louiscad.popularmovies.ui.fragment.MoviesFragment_"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fitsSystemWindows="true"
+        tools:context=".ui.activity.MainActivity_"
+        tools:layout="@layout/fragment_movies"/>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="xyz.louiscad.popularmovies.ui.fragment.MovieDetailFragment_"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fitsSystemWindows="true"
+        tools:context=".ui.activity.MainActivity_"
+        tools:layout="@layout/fragment_movie_detail"/>
+</LinearLayout>

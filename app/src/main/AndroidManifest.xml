@@ -30,18 +30,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity_"/>
         </activity>
-        <activity
-            android:name=".ui.TestMovieListActivity"
-            android:label="@string/title_testmovie_list">
-        </activity>
-        <activity
-            android:name=".ui.TestMovieDetailActivity"
-            android:label="@string/title_testmovie_detail"
-            android:parentActivityName=".ui.TestMovieListActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="xyz.louiscad.popularmovies.ui.TestMovieListActivity"/>
-        </activity>
     </application>
 
 </manifest>

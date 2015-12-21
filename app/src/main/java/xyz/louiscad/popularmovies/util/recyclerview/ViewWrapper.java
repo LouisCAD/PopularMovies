@@ -6,7 +6,7 @@ import android.view.View;
 /**
  * Created by Louis Cognault on 10/09/15.
  */
-public class ViewWrapper<Data, V extends View & ViewWrapper.Binder> extends RecyclerView.ViewHolder {
+public class ViewWrapper<Data, V extends View & ViewWrapper.Binder<Data>> extends RecyclerView.ViewHolder {
 
     private V view;
 

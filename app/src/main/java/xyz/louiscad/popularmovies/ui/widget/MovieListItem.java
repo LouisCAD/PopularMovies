@@ -6,9 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v7.graphics.Palette;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,10 +26,8 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import trikita.log.Log;
-import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
 import xyz.louiscad.popularmovies.model.PaletteLite;
-import xyz.louiscad.popularmovies.ui.activity.MovieDetailActivity_;
 import xyz.louiscad.popularmovies.ui.adapter.MovieItemAdapter;
 import xyz.louiscad.popularmovies.util.recyclerview.ViewWrapper;
 
@@ -41,6 +37,10 @@ import xyz.louiscad.popularmovies.util.recyclerview.ViewWrapper;
  */
 @EViewGroup
 public class MovieListItem extends RelativeLayout implements ViewWrapper.Binder<Movie>, View.OnClickListener {
+
+    public interface ClickListener {
+        void onClick(Movie movie);
+    }
 
     @ViewById
     TextView titleTextView;
@@ -77,7 +77,7 @@ public class MovieListItem extends RelativeLayout implements ViewWrapper.Binder<
 
     @Override
     public void onClick(View v) {
-        MovieDetailActivity_.intent(getContext()).mMovie(mMovie).start();
+        ((ClickListener) getContext()).onClick(mMovie);
     }
 
     @Override
@@ -113,10 +113,5 @@ public class MovieListItem extends RelativeLayout implements ViewWrapper.Binder<
     @UiThread
     void setFooterColor(PaletteLite palette) {
         footerBackground.setBackgroundColor(palette.mutedColor);
-    }
-
-    public static MovieListItem inflate(ViewGroup parent) {
-        return (MovieListItem) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_movie, parent, false);
     }
 }

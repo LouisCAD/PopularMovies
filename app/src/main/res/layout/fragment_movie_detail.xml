@@ -37,20 +37,24 @@
                 android:background="@android:color/transparent"
                 android:clipChildren="false"
                 android:clipToPadding="false"
+                android:fitsSystemWindows="false"
                 app:layout_collapseMode="pin"/>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
-        android:fitsSystemWindows="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
@@ -157,7 +161,6 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_favorite_outline_24dp"
         app:borderWidth="0dp"
-        app:layout_anchor="@id/cl"
-        app:layout_anchorGravity="end|right|bottom"
+        android:layout_gravity="end|bottom"
         app:rippleColor="@color/white"/>
 </android.support.design.widget.CoordinatorLayout>

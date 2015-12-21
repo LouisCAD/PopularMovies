@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fragment
+    android:id="@+id/moviesFragment"
     android:name="xyz.louiscad.popularmovies.ui.fragment.MoviesFragment_"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +8,4 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".ui.activity.MainActivity_"
-    tools:layout="@layout/fragment_movies">
-
-</fragment>
+    tools:layout="@layout/fragment_movies"/>
