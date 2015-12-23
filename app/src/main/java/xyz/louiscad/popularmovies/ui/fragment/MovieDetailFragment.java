@@ -36,6 +36,7 @@ import trikita.log.Log;
 import xyz.louiscad.popularmovies.MoviesApp;
 import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
+import xyz.louiscad.popularmovies.model.Video;
 import xyz.louiscad.popularmovies.ui.adapter.VideoItemAdapter;
 import xyz.louiscad.popularmovies.util.Util;
 
@@ -83,7 +84,6 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
         mVideoAdapter = new VideoItemAdapter();
         if (mMovie != null) onRefresh();
     }
@@ -136,7 +136,19 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
         swipeRefreshLayout.setRefreshing(false);
         if (response.isSuccess()) {
             mMovie = response.body();
-            mVideoAdapter.replaceData(mMovie.videos.results);
+            List<Video> videos = mMovie.videos.results;
+            /**
+             * Filter videos to keep only Youtube ones
+             */
+            for (int i = 0; i < videos.size(); i++) {
+                Video video = videos.get(i);
+                if (!video.site.equals("YouTube")) {
+                    videos.remove(i);
+                    i--;
+                }
+            }
+
+            mVideoAdapter.replaceData(videos);
         }
     }
 
