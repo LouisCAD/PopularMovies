@@ -38,7 +38,7 @@ public class MoviesFragment extends Fragment {
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
 
-        private final Page[] PAGES = new Page[]{
+        private final Page[] PAGES = {
                 new Page(R.string.mostPopular, R.drawable.ic_whatshot_white_24dp, POPULARITY),
                 new Page(R.string.topRated, R.drawable.ic_star_white_24dp, VOTE_AVERAGE),
                 new Page(R.string.newest, R.drawable.ic_new_releases_white_24dp, NEWEST),

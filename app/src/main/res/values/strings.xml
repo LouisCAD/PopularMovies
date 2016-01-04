@@ -102,4 +102,6 @@
     <string name="title_testmovie_list">TestMovies</string>
     <string name="title_testmovie_detail">TestMovie Detail</string>
     <string name="favorites">Favorites</string>
+    <string name="movie_favored">Movie favored!</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
 </resources>

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.v7.graphics.Palette;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,11 +22,13 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import trikita.log.Log;
+import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Movie;
 import xyz.louiscad.popularmovies.model.PaletteLite;
 import xyz.louiscad.popularmovies.ui.adapter.MovieItemAdapter;
@@ -33,6 +36,7 @@ import xyz.louiscad.popularmovies.util.recyclerview.ViewWrapper;
 
 /**
  * List Item for a Movie
+ *
  * @see MovieItemAdapter
  */
 @EViewGroup
@@ -51,7 +55,12 @@ public class MovieListItem extends RelativeLayout implements ViewWrapper.Binder<
     @ViewById
     View footerBackground;
 
+    @ViewById
+    ImageButton favoriteButton;
+
     private Movie mMovie;
+
+    private boolean mIsMovieFavorite = false;
 
     public MovieListItem(Context context) {
         super(context);
@@ -80,9 +89,21 @@ public class MovieListItem extends RelativeLayout implements ViewWrapper.Binder<
         ((ClickListener) getContext()).onClick(mMovie);
     }
 
+    @Click
+    protected void favoriteButtonClicked(View v) {
+        mIsMovieFavorite = !mIsMovieFavorite;
+        favoriteButton.setImageResource(mIsMovieFavorite ?
+                R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_outline_24dp);
+        if (mIsMovieFavorite) mMovie.save();
+        else mMovie.delete();
+    }
+
     @Override
     public void bind(final Movie movie) {
         mMovie = movie;
+        mIsMovieFavorite = movie.exists();
+        favoriteButton.setImageResource(mIsMovieFavorite ?
+                R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_outline_24dp);
         titleTextView.setText(movie.title);
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         if (movie.posterPalette == null) {
@@ -107,7 +128,6 @@ public class MovieListItem extends RelativeLayout implements ViewWrapper.Binder<
         }
         posterImage.setImageURI(movie.posterUrl);
     }
-
 
 
     @UiThread

@@ -3,6 +3,7 @@ package xyz.louiscad.popularmovies.ui.fragment;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,16 +14,19 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.InstanceState;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.ViewsById;
 
@@ -42,7 +46,9 @@ import xyz.louiscad.popularmovies.util.Util;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.support.design.widget.Snackbar.LENGTH_LONG;
+import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
+import static org.androidannotations.annotations.UiThread.Propagation.REUSE;
 
 /**
  * This Fragment is meant to display the details of a Movie
@@ -81,6 +87,8 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
             R.id.commentsTitleTextView})
     List<TextView> mTextViews;
 
+    private boolean mIsMovieFavorite = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +108,8 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
     }
 
     private void bindViewsToData() {
+        mIsMovieFavorite = mMovie.exists();
+        setUpFab(false);
         posterImage.setImageURI(mMovie.posterUrl);
         backdropImage.setImageURI(mMovie.backdropUrl);
         toolbarLayout.setTitle(mMovie.title);
@@ -122,13 +132,34 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
     }
 
     @Click
-    void fabClicked() {
+    void fabClicked(View v) {
+        v.setEnabled(false);
         //TODO: Change icon and remove from db if already favored
-        mMovie.save();
-        Snackbar.make(cl, "Movie favored!", LENGTH_LONG).show();
-        scrollView.scrollTo(0, 0);
-        toolbarLayout.scrollTo(0, 0);
-        //swipeRefreshLayout.scrollTo(0, 0);
+        toggleFavorite();
+
+    }
+
+    @Background
+    protected void toggleFavorite() {
+        if (mIsMovieFavorite) {
+            mMovie.delete();
+        } else {
+            mMovie.save();
+        }
+        mIsMovieFavorite = !mIsMovieFavorite;
+        setUpFab(true);
+    }
+
+    @UiThread(propagation = REUSE)
+    protected void setUpFab(boolean justToggled) {
+        if (justToggled) {
+            @StringRes int messageResId = mIsMovieFavorite ?
+                    R.string.movie_favored : R.string.removed_from_favorites;
+            Snackbar.make(cl, messageResId, LENGTH_SHORT).show();
+        }
+        fab.setImageResource(mIsMovieFavorite ?
+                R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_outline_24dp);
+        fab.setEnabled(true);
     }
 
     @Override
@@ -160,6 +191,7 @@ public class MovieDetailFragment extends Fragment implements SwipeRefreshLayout.
 
     public void setMovie(Movie movie) {
         mMovie = movie;
+        fab.setEnabled(false);
         bindViewsToData();
         scrollView.scrollTo(0, 0);
         toolbarLayout.scrollTo(0, 0);

@@ -1,6 +1,5 @@
 package xyz.louiscad.popularmovies.ui.activity;
 
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -39,29 +38,13 @@ public class MainActivity extends AppCompatActivity implements MovieListItem.Cli
 
     @AfterViews
     void init() {
-        //mTwoPane = mMovieDetailFragment != null; //
         mTwoPane = twoPaneContainer != null;
-        Log.d("mTwoPane %b", mTwoPane);
-        Log.d("moviesFragment id: " + mMoviesFragment.getId());
-        Log.d("detailsFragment id: " + mMovieDetailFragment.getId());
+        if (!mTwoPane) mMovieDetailFragment = null;
     }
 
     @OptionsItem
     void actionSettingsSelected() {
         Log.i("Settings clicked");
-    }
-
-        //Log.i("Fragment attached with id: " + fragment.getId());
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        this.mMoviesFragment = findSupportFragmentById(R.id.moviesFragment, fragment);
-        this.mMovieDetailFragment = findSupportFragmentById(R.id.detailFragment, fragment);
-    }
-
-    @SuppressWarnings("unchecked cast")
-    private <F extends android.support.v4.app.Fragment> F findSupportFragmentById(int id, Fragment fragment) {
-        boolean isExpected = id == fragment.getId();
-        return (isExpected ? (F) fragment : null);
     }
 
     @Override
