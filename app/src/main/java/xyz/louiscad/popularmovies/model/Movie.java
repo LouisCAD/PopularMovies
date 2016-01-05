@@ -1,6 +1,7 @@
 package xyz.louiscad.popularmovies.model;
 
 import android.net.Uri;
+import android.support.annotation.DrawableRes;
 
 import com.bluelinelabs.logansquare.annotation.JsonIgnore;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
@@ -14,6 +15,7 @@ import org.parceler.Parcel;
 import java.util.Date;
 import java.util.List;
 
+import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.data.PopMoviesDatabase;
 import xyz.louiscad.popularmovies.util.ImageUtil;
 import xyz.louiscad.popularmovies.data.util.ParcelableModel;
@@ -68,11 +70,55 @@ public class Movie extends ParcelableModel {
     public String status;
     public long budget;
     public List<Genre> genres;
-    public List<ProductionCompany> production_companies;
+    public List<ProductionCompany> productionCompanies;
     public VideosResult videos;
+
+    private boolean isFavored = true;
+
+    public boolean isFavored() {
+        return isFavored;
+    }
+
+    @Override
+    public void save() {
+        super.save();
+        isFavored = true;
+    }
+
+    @Override
+    public void delete() {
+        super.delete();
+        isFavored = false;
+    }
+
+    public void addToFavorites() {
+        save();
+    }
+
+    public void removeFromFavorites() {
+        delete();
+    }
+
+    /**
+     * @return favorite icon for the new state
+     */
+    @DrawableRes
+    public int toggleFavoredState() {
+        if (isFavored) delete();
+        else save();
+        return (isFavored ?
+                R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_outline_24dp);
+    }
+
+    @DrawableRes
+    public int getFavoredStateIcon() {
+        return (isFavored ?
+                R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_outline_24dp);
+    }
 
     @OnJsonParseComplete
     void onParseComplete() {
+        isFavored = exists();
         posterUrl = ImageUtil.getPosterUri(posterPath);
         backdropUrl = ImageUtil.getBackdropUri(backdropPath);
     }
