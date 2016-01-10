@@ -23,7 +23,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<ViewHolder<?>> {
     public static final int VIEW_TYPE_OVERVIEW = R.layout.list_item_overview;
     public static final int VIEW_TYPE_VIDEOS = R.layout.list_item_videos_list;
     public static final int VIEW_TYPE_REVIEW_TITLE = R.layout.list_item_review_title;
-    public static final int VIEW_TYPE_REVIEW = R.layout.list_item_comment;
+    public static final int VIEW_TYPE_REVIEW = R.layout.list_item_review;
 
     /**
      * Contains View types for adapter positions.
