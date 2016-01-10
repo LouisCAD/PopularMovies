@@ -75,7 +75,7 @@ public final class TheMovieDb {
         @GET("movie/{id}/videos")
         Call<VideosResult> getVideos(@Path("id") long id);
 
-        @GET("movie/{id}/review")
+        @GET("movie/{id}/reviews")
         Call<ReviewsResult> getReviews(@Path("id") long id);
     }
 }

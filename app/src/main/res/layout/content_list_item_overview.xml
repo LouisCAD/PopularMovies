@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/overViewTitleTextView"
+        style="@style/TitleTextViewStyle"
+        android:text="@string/overview"/>
+
+    <TextView
+        android:id="@+id/overViewTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        tools:text="BlaBlaBla"/>
+</merge>

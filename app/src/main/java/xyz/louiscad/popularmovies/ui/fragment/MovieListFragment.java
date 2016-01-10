@@ -83,6 +83,12 @@ public class MovieListFragment extends Fragment
         });
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
         swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
     }
 
     @Override
@@ -93,7 +99,7 @@ public class MovieListFragment extends Fragment
 
     @Override
     public void onResponse(Response<MovieDiscoverResult> response, Retrofit retrofit) {
-        swipeRefreshLayout.setRefreshing(false);
+        if (swipeRefreshLayout != null) swipeRefreshLayout.setRefreshing(false);
         MovieDiscoverResult result = response.body();
         if (!response.isSuccess() || result == null) onFailure(new NullPointerException());
         else mAdapter.onDataUpdated(response.body().results, response.body().page);
@@ -102,8 +108,10 @@ public class MovieListFragment extends Fragment
     @Override
     public void onFailure(Throwable t) {
         Log.d(t);
-        swipeRefreshLayout.setRefreshing(false);
-        Snackbar.make(swipeRefreshLayout, "Oops! Unable to get movies…", LENGTH_LONG).show();
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(false);
+            Snackbar.make(swipeRefreshLayout, "Oops! Unable to get movies…", LENGTH_LONG).show();
+        }
     }
 
     @StringDef({POPULARITY, NEWEST, VOTE_AVERAGE})

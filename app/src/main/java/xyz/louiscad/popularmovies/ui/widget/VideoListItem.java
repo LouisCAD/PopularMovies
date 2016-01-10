@@ -4,27 +4,16 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.EView;
 
-import xyz.louiscad.popularmovies.R;
 import xyz.louiscad.popularmovies.model.Video;
 import xyz.louiscad.popularmovies.util.recyclerview.ViewWrapper;
 
-/**
- * Created by Louis Cognault on 26/11/15.
- */
-@EViewGroup
-public class VideoListItem extends FrameLayout implements ViewWrapper.Binder<Video> {
-
-    @ViewById
-    SimpleDraweeView thumbnail;
+@EView
+public class VideoListItem extends SimpleDraweeView implements ViewWrapper.Binder<Video> {
 
     public VideoListItem(Context context) {
         super(context);
@@ -45,11 +34,6 @@ public class VideoListItem extends FrameLayout implements ViewWrapper.Binder<Vid
 
     @Override
     public void bind(Video video) {
-        thumbnail.setImageURI(video.thumbnailUrl);
-    }
-
-    public static VideoListItem inflate(ViewGroup parent) {
-        return (VideoListItem) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_video, parent, false);
+        setImageURI(video.thumbnailUrl);
     }
 }

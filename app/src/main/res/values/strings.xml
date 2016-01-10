@@ -104,4 +104,7 @@
     <string name="favorites">Favorites</string>
     <string name="movie_favored">Movie favored!</string>
     <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="vote_avg" formatted="false" translatable="false">%d/10</string>
+    <string name="vote_count" formatted="false">%d votes</string>
+    <string name="reviews">Reviews</string>
 </resources>

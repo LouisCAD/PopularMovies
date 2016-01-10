@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xyz.louiscad.popularmovies.ui.widget.MovieListItem_
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/posterImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        fresco:progressBarImage="@color/colorPrimary"
-        fresco:viewAspectRatio="0.6654676259"/>
+    <include layout="@layout/poster"/>
 
     <TextView
         android:id="@+id/titleTextView"
@@ -26,7 +19,6 @@
         android:layout_gravity="start|center_vertical"
         android:layout_toLeftOf="@+id/favoriteButton"
         android:layout_toStartOf="@+id/favoriteButton"
-
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="2"

@@ -20,7 +20,7 @@ public abstract class RecyclerViewAdapterBase<Data, V extends View & ViewWrapper
 
     @Override
     public final void onBindViewHolder(ViewWrapper<Data, V> holder, int position) {
-        V view = holder.getView();
+        V view = holder.view;
         Data data = getData(position);
         view.bind(data);
     }
