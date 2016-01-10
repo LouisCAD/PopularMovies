@@ -23,9 +23,11 @@ public class Video {
     public int size;
     public String type;
     public Uri thumbnailUrl;
+    public Uri videoUrl;
 
     @OnJsonParseComplete
     void onParseComplete() {
         thumbnailUrl = Uri.parse("http://img.youtube.com/vi/" + key + "/mqdefault.jpg");
+        videoUrl = Uri.parse("https://youtu.be/" + key);
     }
 }
