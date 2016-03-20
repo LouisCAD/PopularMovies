@@ -30,26 +30,19 @@ buildscript {
     }
 }
 
-repositories {
-    maven {
-        url = 'https://oss.sonatype.org/content/repositories/snapshots' // For snapshots
-    }
-}
-
 ext {
-    AAVersion = '3.3.2'
-    AASnapshotVersion = '4.0-SNAPSHOT'
+    AAVersion = '4.0.0'
     parcelerVersion = '1.0.4'
     dbFlowVersion = '2.2.1'
-    supportLibVersion = '23.1.1'
+    supportLibVersion = '23.2.1'
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     // AndroidAnnotations
-    compile "org.androidannotations:androidannotations-api:${AASnapshotVersion}"
-    apt "org.androidannotations:androidannotations:${AASnapshotVersion}"
+    compile "org.androidannotations:androidannotations-api:${AAVersion}"
+    apt "org.androidannotations:androidannotations:${AAVersion}"
     // LoganSquare
     apt 'com.bluelinelabs:logansquare-compiler:1.3.1'
     // Parceler
