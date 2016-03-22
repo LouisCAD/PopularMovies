@@ -99,6 +99,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<ViewHolder<?>> {
             RecyclerView videoRV = ((RecyclerView) holder.view);
             videoRV.setLayoutManager(mVideoLayoutManager);
             videoRV.setAdapter(mVideoAdapter);
+            videoRV.setNestedScrollingEnabled(false);
         } else if (position < VIEW_TYPES.length) {
             if (VIEW_TYPES[position] != VIEW_TYPE_REVIEW_TITLE) {
                 ((ViewWrapper<Movie, ?>) holder).view.bind(mMovie);
